@@ -140,6 +140,7 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
         picker.setDisplayDays(displayDays);
         picker.setDisplayMinutes(displayMinutes);
         picker.setDisplayHours(displayHours);
+
     }
 
     public SingleDateAndTimePickerDialog setListener(Listener listener) {

@@ -64,6 +64,7 @@ public class SingleDateAndTimePicker extends LinearLayout {
 
     private boolean isAmPm;
     private int selectorHeight;
+    private boolean linkedWheelUpdates = true;
 
     public SingleDateAndTimePicker(Context context) {
         this(context, null);
@@ -112,7 +113,9 @@ public class SingleDateAndTimePicker extends LinearLayout {
 
             @Override
             public void onMinuteScrolledNewHour(WheelMinutePicker picker) {
-                hoursPicker.scrollTo(hoursPicker.getCurrentItemPosition() + 1);
+                if(linkedWheelUpdates) {
+                    hoursPicker.scrollTo(hoursPicker.getCurrentItemPosition() + 1);
+                }
             }
         });
 
@@ -130,7 +133,9 @@ public class SingleDateAndTimePicker extends LinearLayout {
 
             @Override
             public void onHourCurrentNewDay(WheelHourPicker picker) {
-                daysPicker.scrollTo(daysPicker.getCurrentItemPosition() + 1);
+                if(linkedWheelUpdates) {
+                    daysPicker.scrollTo(daysPicker.getCurrentItemPosition() + 1);
+                }
             }
         });
 
@@ -231,6 +236,10 @@ public class SingleDateAndTimePicker extends LinearLayout {
         if (simpleDateFormat != null) {
             this.daysPicker.setDayFormatter(simpleDateFormat);
         }
+    }
+
+    public void setLinkedWheelUpdates(boolean linkedWheelUpdates) {
+        this.linkedWheelUpdates = linkedWheelUpdates;
     }
 
     public boolean isAmPm() {
