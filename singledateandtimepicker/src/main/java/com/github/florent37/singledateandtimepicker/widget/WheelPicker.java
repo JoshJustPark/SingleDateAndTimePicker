@@ -71,7 +71,7 @@ public abstract class WheelPicker extends View {
   private int mCurtainColor;
   private int mItemSpace;
   private int mItemAlign;
-  private int mItemHeight, mHalfItemHeight;
+  private int mItemHeight, mThirdItemHeight;
   private int mHalfWheelHeight;
   private int selectedItemPosition;
   private int currentItemPosition;
@@ -292,7 +292,7 @@ public abstract class WheelPicker extends View {
     mHalfWheelHeight = rectDrawn.height() / 2;
 
     mItemHeight = rectDrawn.height() / mVisibleItemCount;
-    mHalfItemHeight = mItemHeight / 2;
+    mThirdItemHeight = mItemHeight / 3;
 
     // Initialize fling max Y-coordinates
     computeFlingLimitY();
@@ -329,8 +329,8 @@ public abstract class WheelPicker extends View {
   private void computeIndicatorRect() {
     if (!hasIndicator) return;
     int halfIndicatorSize = mIndicatorSize / 2;
-    int indicatorHeadCenterY = wheelCenterY + mHalfItemHeight;
-    int indicatorFootCenterY = wheelCenterY - mHalfItemHeight;
+    int indicatorHeadCenterY = wheelCenterY + mThirdItemHeight;
+    int indicatorFootCenterY = wheelCenterY - mThirdItemHeight;
     rectIndicatorHead.set(rectDrawn.left, indicatorHeadCenterY - halfIndicatorSize, rectDrawn.right,
         indicatorHeadCenterY + halfIndicatorSize);
     rectIndicatorFoot.set(rectDrawn.left, indicatorFootCenterY - halfIndicatorSize, rectDrawn.right,
@@ -339,8 +339,8 @@ public abstract class WheelPicker extends View {
 
   private void computeCurrentItemRect() {
     if (!hasCurtain && mSelectedItemTextColor == -1) return;
-    rectCurrentItem.set(rectDrawn.left, wheelCenterY - mHalfItemHeight, rectDrawn.right,
-        wheelCenterY + mHalfItemHeight);
+    rectCurrentItem.set(rectDrawn.left, wheelCenterY - mThirdItemHeight, rectDrawn.right,
+        wheelCenterY + mThirdItemHeight);
   }
 
   @Override
@@ -554,7 +554,7 @@ public abstract class WheelPicker extends View {
   }
 
   private int computeDistanceToEndPoint(int remainder) {
-    if (Math.abs(remainder) > mHalfItemHeight) {
+    if (Math.abs(remainder) > mThirdItemHeight) {
       if (scrollOffsetY < 0) {
         return -mItemHeight - remainder;
       } else {
